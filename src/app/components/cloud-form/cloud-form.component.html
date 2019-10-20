@@ -1,0 +1,159 @@
+<div class="pt-4 d-flex justify-content-center">
+    <form class="w-100 cloud-form" [formGroup]="cloudForm">
+        <div class="w-100 d-flex justify-content-center cloud-details"> <!-- Themes -->
+            <div class="row pb-3 d-flex justify-content-center">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <img class="pb-2" src="../../../assets/images/default.png" width="110px" height="74px" />
+                        <div class="d-flex justify-content-center">
+                            <input class="form-check-input" type="radio" value="default" formControlName="theme"
+                                selected>
+                            <strong>Default</strong>
+                        </div>
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <img class="pb-2" src="../../../assets/images/neon.png" width="110px" height="74px" />
+                        <div class="d-flex justify-content-center">
+                            <input class="form-check-input" type="radio" value="neon" formControlName="theme">
+                            <strong>Neon</strong>
+                        </div>
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <img class="pb-2" src="../../../assets/images/autumn.png" width="110px" height="74px" />
+                        <div class="d-flex justify-content-center">
+                            <input class="form-check-input" type="radio" value="autumn" formControlName="theme">
+                            <strong>Autumn</strong>
+                        </div>
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <img class="pb-2" src="../../../assets/images/dusk.png" width="110px" height="74px" />
+                        <div class="d-flex justify-content-center">
+                            <input class="form-check-input" type="radio" value="dusk" formControlName="theme">
+                            <strong>Dusk</strong>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div> <!-- End Themes -->
+        <div class="w-100 d-flex justify-content-center cloud-details">
+            <div class="w-100 row">
+                <div class="w-100 col-sm p-2">
+                    <div class="w-100 form-group">
+                        <label class="w-100">
+                            <div class="pb-2">
+                                <strong>Job Description:</strong>
+                            </div>
+                            <textarea type="text" class="form-control" formControlName="jobDescription" rows="7"></textarea>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="w-100">
+                            <div class="pb-1">
+                                <strong>Job Title:</strong>
+                            </div>
+                            <input type="text" class="form-control" formControlName="jobTitle">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="w-100">
+                            <div class="pb-1">
+                                <strong>Job Location:</strong>
+                            </div>
+                            <input type="text" class="form-control" formControlName="jobLocation">
+                        </label>
+                    </div>
+                </div>
+                <div class="w-100 col-sm p-2">
+                    <strong>Skills/Keywords/Phrases:</strong>
+                    <div class="mb-2">
+                        <small class="form-text text-muted">Enter a skill, keyword, or phrase and assign a weight</small>
+                        <div class="d-flex justify-content-between">
+                            <input type="text" class="form-control w-50" formControlName="newKeyword">
+                            <select class="form-control w-25" formControlName="newKeywordWeight">
+                                <option value="1" selected>1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                            <button type="button" class="btn btn-dark" (click)="addKeyword()">Add</button>
+                        </div>
+                    </div>
+                    <div class="kw-container">
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action"
+                                *ngFor="let kw of keywords; let i = index">
+                                <button type="button" class="close" aria-label="Remove" (click)="removeKeyword(i)">
+                                    <span title="Remove" aria-hidden="true">&times;</span>
+                                </button>
+                                <span class="pointer" (click)="loadKeyword(i)">{{kw.text}}</span>
+                                <span class="badge badge-primary badge-pill">{{kw.weight}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-100 mb-2 mt-2 d-flex justify-content-center cloud-details">
+            <div class="w-50 row pb-3 d-flex justify-content-between">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" value="linkedin" formControlName="channel" selected>
+                    <label class="form-check-label">
+                        LinkedIn
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" value="twitter" formControlName="channel">
+                    <label class="form-check-label">
+                        Twitter
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" value="facebook" formControlName="channel">
+                    <label class="form-check-label">
+                        Facebook
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" value="instagram" formControlName="channel">
+                    <label class="form-check-label">
+                        Instagram
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" value="pinterest" formControlName="channel">
+                    <label class="form-check-label">
+                        Pinterest
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-primary mb-3" (click)="generateCloudImage()">{{formBtnText}}</button>
+        </div>
+        <div class="d-flex justify-content-center">
+            <div class="loading" *ngIf="loading">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="w-100 d-flex justify-content-center" *ngIf="errorMessage">
+                <div class="w-50 d-flex justify-content-center alert alert-danger" role="alert">
+                    {{errorMessage}}
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<app-image-container [imgData]="imageBase64"></app-image-container>
