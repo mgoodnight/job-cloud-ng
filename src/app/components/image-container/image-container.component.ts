@@ -14,6 +14,9 @@ export class ImageContainerComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Function to scroll page
+   */
   public scrollToImage(): void {
     window.scroll({
       top: 500,
