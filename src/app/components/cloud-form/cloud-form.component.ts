@@ -10,15 +10,26 @@ import { Keyword } from '../../models/keyword';
   styleUrls: ['./cloud-form.component.scss']
 })
 export class CloudFormComponent implements OnInit {
+  /** Cloud Image Reactive Form */
   public cloudForm: FormGroup;
+  /** Keywords array store */
   public keywords: Keyword[];
+  /** Changes after the first image is generated */
   public formBtnText: string;
+  /** Base64 string from API */
   public imageBase64: string;
+  /** Loading flag */
   public loading: boolean;
+  /** Error message */
   private _errorMessage: string;
 
   constructor(private _formBuilder: FormBuilder, private _cloudApiService: CloudApiService) { }
 
+  /**
+   * Set button text
+   * Load default keywords
+   * Generate our reactive form
+   */
   ngOnInit() {
     this.formBtnText = 'Generate';
     this.keywords = [
@@ -39,6 +50,9 @@ export class CloudFormComponent implements OnInit {
     this.createForm();
   }
 
+  /**
+   * Create our reactive form
+   */
   public createForm(): void {
     this.cloudForm = this._formBuilder.group({
       theme: new FormControl('default', [Validators.required]),
@@ -51,6 +65,10 @@ export class CloudFormComponent implements OnInit {
     });
   }
 
+  /**
+   * Generate cloud image
+   * Verify form requirements and pass onto API for generating
+   */
   public generateCloudImage(): void {
     if (this._isFormValid()) {
       this.errorMessage = '';
@@ -81,6 +99,9 @@ export class CloudFormComponent implements OnInit {
     }
   }
 
+  /**
+   * Add keywords based on newKeyword and newKeywordWeight fields of cloudForm
+   */
   public addKeyword(): void {
     if (this.cloudForm.controls.newKeyword.value) {
       const existIndex =
@@ -100,15 +121,27 @@ export class CloudFormComponent implements OnInit {
     }
   }
 
+  /**
+   * Populate newKeyword and newKeywordWeight fields for editing by index
+   * @param index 
+   */
   public loadKeyword(index: number): void {
     this.cloudForm.controls.newKeyword.setValue(this.keywords[index].text);
     this.cloudForm.controls.newKeywordWeight.setValue(this.keywords[index].weight);
   }
 
+  /**
+   * Remove keyword by index
+   * @param index 
+   */
   public removeKeyword(index: number): void {
     this.keywords.splice(index, 1);
   }
 
+  /**
+   * Verify cloudForm fields.
+   * If not valid, populate _errorMessage via setter based on where cloudForm is invalid
+   */
   private _isFormValid(): boolean {
     if (this.cloudForm.valid) {
       return true;
@@ -137,10 +170,16 @@ export class CloudFormComponent implements OnInit {
     return false;
   }
 
+  /**
+   * Get _errorMessage
+   */
   get errorMessage(): string {
     return this._errorMessage;
   }
 
+  /**
+   * Set _errorMessage
+   */
   set errorMessage(newError: string) {
     this._errorMessage = newError;
   }

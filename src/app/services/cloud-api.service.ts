@@ -13,6 +13,11 @@ export class CloudApiService {
 
   constructor(private _http: HttpClient) { }
 
+  /**
+   * POST request to generate image
+   * 
+   * @param imageDetails 
+   */
   public generateImage(imageDetails: CloudImageDetails): Observable<string> {
     const resource = `${this.apiUrl}/generate`;
     return this._http.post<{image: string}>(resource, imageDetails).pipe(map(res => res.image));
