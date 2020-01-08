@@ -1,7 +1,6 @@
 version: 2
 jobs:
-    lint:
-        working_directory: ~/job-cloud-ng
+    build:
         docker:
             - image: circleci/node:12-browsers
         steps:
@@ -9,7 +8,6 @@ jobs:
             - run:
                 name: Information
                 command: echo "Running build for ${CIRCLE_PROJECT_REPONAME} on branch ${CIRCLE_BRANCH}"
-            # Restore local dependencies from cache
             - restore_cache:
                 keys:
                 - deps-{{ checksum "package-lock.json" }}
