@@ -1,0 +1,29 @@
+version: 2
+jobs:
+	lint:
+		working_directory: ~/job-cloud-ng
+		docker:
+			- image: circleci/node:12-browsers
+		steps:
+			- checkout
+			- run:
+				name: Information
+				command: echo "Running build for ${CIRCLE_PROJECT_REPONAME} on branch ${CIRCLE_BRANCH}"
+			# Restore local dependencies from cache
+			- restore_cache:
+				keys:
+				- deps-{{ checksum "package-lock.json" }}
+				- deps-
+			- run:
+				name: Install dependencies
+				command: npm install 
+			- save_cache:
+				key: deps-{{ checksum "package-lock.json" }}
+				paths:
+					- node_modules
+			- run:
+				name: Linting
+				command: npm run lint
+			- run:
+				name: Testing
+				command: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
