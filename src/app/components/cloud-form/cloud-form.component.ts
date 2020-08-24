@@ -123,7 +123,7 @@ export class CloudFormComponent implements OnInit {
 
   /**
    * Populate newKeyword and newKeywordWeight fields for editing by index
-   * @param index 
+   * @param index Index of keywords
    */
   public loadKeyword(index: number): void {
     this.cloudForm.controls.newKeyword.setValue(this.keywords[index].text);
@@ -132,7 +132,7 @@ export class CloudFormComponent implements OnInit {
 
   /**
    * Remove keyword by index
-   * @param index 
+   * @param index Index of keywords
    */
   public removeKeyword(index: number): void {
     this.keywords.splice(index, 1);
