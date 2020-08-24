@@ -15,8 +15,8 @@ export class CloudApiService {
 
   /**
    * POST request to generate image
-   * 
-   * @param imageDetails 
+   *
+   * @param imageDetails CloudImageDetails
    */
   public generateImage(imageDetails: CloudImageDetails): Observable<string> {
     const resource = `${this.apiUrl}/generate`;
