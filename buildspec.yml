@@ -4,17 +4,17 @@ phases:
     runtime-versions:
       nodejs: 10
     commands:
+      - apt-get update
+      - apt-get --assume-yes install google-chrome-stable
+  pre_build:
+    commands:
       - npm install
       - npm install -g @angular/cli
-  lint:
-    commands:
       - npm run lint
-  test:
-    commands:
-      - npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+      - npm run test -- --no-watch --no-progress --browsers=ChromeHeadless
   build:
     commands:
-      - ng build --prod="true"
+      - ng build --prod='true'
 artifacts:
   files:
     - dist/**/*
