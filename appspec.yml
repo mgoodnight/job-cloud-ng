@@ -1,5 +1,5 @@
 version: 0.0
 os: linux
 files:
-  - source: job-clouds-front
+  - source: /
     destination: /var/www/job-clouds/front
