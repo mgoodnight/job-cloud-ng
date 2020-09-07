@@ -1,0 +1,22 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 10
+    commands:
+      - npm install
+      - npm install -g @angular/cli
+  lint:
+    commands:
+      - npm run lint
+  test:
+    commands:
+      - npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+  build:
+    commands:
+      - ng build --prod="true"
+artifacts:
+  files:
+    - dist/**/*
+    - appspec.yml
+  discard-paths: yes
