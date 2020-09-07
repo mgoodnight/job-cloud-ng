@@ -11,12 +11,16 @@ phases:
       - npm install
       - npm install -g @angular/cli
       - npm run lint
-      - npm run test -- --no-watch --no-progress --browsers=ChromeHeadless
+      - npm test -- --no-watch --no-progress --browsers=ChromeHeadless
   build:
     commands:
       - ng build --prod='true'
+  post_build:
+    commands:
+      - mv appspec.yml dist/job-clouds-front/
+      - tar -C dist/ -zcvf job-clouds-front.tar.gz job-clouds-front
 artifacts:
+  name: job-clouds-front
   files:
-    - dist/**/*
-    - appspec.yml
+    - job-clouds-front.tar.gz
   discard-paths: yes
