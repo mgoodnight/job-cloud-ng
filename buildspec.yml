@@ -15,8 +15,10 @@ phases:
   build:
     commands:
       - ng build --prod='true'
+  post_build:
+    commands:
+      - mv appspec.yml dist/job-clouds-front
 artifacts:
   files:
-    - appspec.yml
-    - dist/**/*
-  discard-paths: yes
+    - '**/*'
+  base-directory: 'dist*'
