@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  cloudApiURL: 'https://job-cloud.mgoodnight.com/api'
+  cloudApiURL: 'https://job-clouds.mgoodnight.com/api'
 };
